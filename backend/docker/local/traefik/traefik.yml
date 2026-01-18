@@ -1,6 +1,6 @@
 api:
   dashboard: true
-  insecured: true
+  insecure: true
 
 log:
   level: DEBUG
@@ -18,13 +18,14 @@ middlewares:
 
 providers:
   docker:
-    endpoint: "unix///var/run/docker.sock"
-    watch: true
+    endpoint: "unix:///var/run/docker.sock"
     exposedByDefault: false
+    watch: true
     network: nextgen_local_nw
 
 entryPoints:
   web:
     address: ":80"
+
   websecure:
     address: ":443"
