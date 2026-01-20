@@ -3,7 +3,7 @@ from backend.app.api.main import api_router
 from backend.app.core.config import settings
 from contextlib import asynccontextmanager
 from backend.app.core.db import init_db
-
+from prometheus_fastapi_instrumentator import Instrumentator
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     await init_db()
@@ -17,3 +17,4 @@ app = FastAPI(title=settings.PROJECT_NAME, description=settings.PROJECT_DESCRIPT
               )
 
 app.include_router(api_router,prefix=settings.API_V1_STR)
+Instrumentator().instrument(app).expose(app,endpoint=f"{settings.API_V1_STR}/metrics")
