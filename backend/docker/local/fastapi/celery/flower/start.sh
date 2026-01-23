@@ -6,7 +6,7 @@ set -o nounset
 set -o pipefail
 
 FLOWER_CMD="celery \
--A backend.app.core.celery_App \
+-A backend.app.core.celery_app \
 -b ${CELERY_BROKER_URL} \
 flower \ 
 --address=0.0.0.0 \
@@ -16,5 +16,5 @@ flower \
 
 exec watchfiles \
 --filter python \
---ignore_paths '.vens,.git,__pycache__,*.pyc' \
+--ignore-paths '.vens,.git,__pycache__,*.pyc' \
 "${FLOWER_CMD}"
